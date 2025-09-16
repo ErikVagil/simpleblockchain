@@ -4,13 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.junit.jupiter.api.Test;
 
 public class HashTest {
 	
 	@Test
-	void from_generatesCorrectSha256Hash() {
+	void fromGeneratesCorrectSha256Hash() {
 		// Known SHA-256 hash for "hello"
 		String expected = "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824";
 
@@ -20,7 +19,7 @@ public class HashTest {
 	}
 
 	@Test
-	void from_isDeterministic() {
+	void fromIsDeterministic() {
 		Hash hash1 = Hash.from("test-string");
 		Hash hash2 = Hash.from("test-string");
 
@@ -29,7 +28,7 @@ public class HashTest {
 	}
 
 	@Test
-	void equals_returnsFalseForDifferentHashes() {
+	void equalsReturnsFalseForDifferentHashes() {
 		Hash hash1 = Hash.from("abc");
 		Hash hash2 = Hash.from("xyz");
 
@@ -37,13 +36,13 @@ public class HashTest {
 	}
 
 	@Test
-	void equals_returnsFalseForDifferentType() {
+	void equalsReturnsFalseForDifferentType() {
 		Hash hash = Hash.from("abc");
 		assertNotEquals(hash, "some-string");
 	}
 
 	@Test
-	void equals_isReflexiveAndSymmetric() {
+	void equalsIsReflexiveAndSymmetric() {
 		Hash hash1 = Hash.from("same");
 		Hash hash2 = Hash.from("same");
 
@@ -53,13 +52,13 @@ public class HashTest {
 	}
 
 	@Test
-	void toString_returnsHashValue() {
+	void toStringReturnsHashValue() {
 		Hash hash = Hash.from("hello");
 		assertEquals(hash.getHash(), hash.toString());
 	}
 
 	@Test
-	void getHash_returnsUnderlyingHashValue() {
+	void getHashReturnsUnderlyingHashValue() {
 		String data = "my-data";
 		Hash hash = Hash.from(data);
 
@@ -68,7 +67,7 @@ public class HashTest {
 	}
 
 	@Test
-	void hashCode_consistentWithEquals() {
+	void hashCodeConsistentWithEquals() {
 		Hash h1 = Hash.from("abc");
 		Hash h2 = Hash.from("abc");
 		assertEquals(h1.hashCode(), h2.hashCode());
