@@ -12,10 +12,14 @@ public class Block {
 		this.data = data;
 		this.previousHash = previousHash;
 		timestamp = new Date().getTime();
-		hash = computeHash();
+		hash = initializeHash();
 	}
 
-	private Hash computeHash() {
+	private Hash initializeHash() {
+		return computeHash();
+	}
+
+	public Hash computeHash() {
 		// Combine fields to be preserved to make the hash for this block:
 		// Data stored in the block, the previous hash, and the timestamp
 		Hash currentHash = Hash.from(

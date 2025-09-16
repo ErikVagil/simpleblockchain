@@ -34,6 +34,14 @@ class BlockTest {
 	}
 
 	@Test
+	void blockHashStoredEqualsBlockHashComputed() {
+		Hash genesisHash = Hash.from("genesis");
+		Block block = new Block("Some data", genesisHash);
+
+		assertEquals(block.getHash(), block.computeHash());
+	}
+
+	@Test
 	void blocksWithDifferentDataHaveDifferentHashes() {
 		Hash genesisHash = Hash.from("genesis");
 		Block block1 = new Block("Data A", genesisHash);
