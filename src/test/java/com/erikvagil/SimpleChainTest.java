@@ -1,7 +1,5 @@
 package com.erikvagil;
 
-import java.lang.reflect.Field;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -64,9 +62,7 @@ public class SimpleChainTest {
         testChain.addBlock(block1);
 
 		// Tamper with block1's hash
-		Field hashField = Block.class.getDeclaredField("hash");
-		hashField.setAccessible(true);
-		hashField.set(block1, Hash.from("fake hash"));
+		block1.setHash(Hash.from("fake hash"));
 
         assertFalse(testChain.isValidChain(), "Tampering with a block should make the chain invalid.");
     }

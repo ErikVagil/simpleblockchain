@@ -3,10 +3,10 @@ package com.erikvagil;
 import java.util.Date;
 
 public class Block {
-	private String data;
+	private final String data;
 	private Hash hash;
 	private Hash previousHash;
-	private long timestamp;
+	private final long timestamp;
 
 	public Block(String data, Hash previousHash) {
 		this.data = data;
@@ -45,4 +45,12 @@ public class Block {
 	public long getTimestamp() {
 		return timestamp;
 	}
+
+    public void setHash(Hash hash) {
+        this.hash = hash;
+    }
+
+    public void setPreviousHash(Hash previousHash) {
+        this.previousHash = previousHash;
+    }
 }

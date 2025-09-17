@@ -3,8 +3,8 @@ package com.erikvagil;
 import java.util.ArrayList;
 
 public class SimpleChain {
-	private Hash genesis = Hash.from("genesis");
-	private ArrayList<Block> blockChain = new ArrayList<>();
+	public Hash genesis = Hash.from("genesis");
+	private final ArrayList<Block> blockChain = new ArrayList<>();
 
 	public SimpleChain() {}
 
