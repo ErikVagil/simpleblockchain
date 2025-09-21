@@ -11,14 +11,13 @@ public class SimpleChainTest {
     private SimpleChain testChain;
 
     @BeforeEach
-    @SuppressWarnings("unused")
     void setUp() {
         testChain = new SimpleChain();
     }
 
     @Test
     void addBlockShouldAddBlockToChain() {
-        Block block = new Block("Block #1", Hash.from("genesis"));
+        Block block = new Block("Block #1", testChain.getGenesisBlock().getHash());
         testChain.addBlock(block);
 
         assertEquals(block, testChain.getLastBlock(), "Last block should be the one that was just added.");
@@ -26,7 +25,7 @@ public class SimpleChainTest {
 
     @Test
     void getLastBlockShouldReturnMostRecentBlock() {
-        Block block1 = new Block("Block #1", Hash.from("genesis"));
+        Block block1 = new Block("Block #1", testChain.getGenesisBlock().getHash());
         Block block2 = new Block("Block #2", block1.getHash());
 
         testChain.addBlock(block1);
@@ -37,7 +36,7 @@ public class SimpleChainTest {
 
     @Test
     void isValidChainShouldReturnTrueForSingleBlock() {
-        Block block1 = new Block("Block #1", Hash.from("genesis"));
+        Block block1 = new Block("Block #1", testChain.getGenesisBlock().getHash());
         testChain.addBlock(block1);
 
         assertTrue(testChain.isValidChain(), "A chain with only one block should be valid.");
@@ -45,7 +44,7 @@ public class SimpleChainTest {
 
     @Test
     void isValidChainShouldReturnTrueForProperlyLinkedBlocks() {
-        Block block1 = new Block("Block #1", Hash.from("genesis"));
+        Block block1 = new Block("Block #1", testChain.getGenesisBlock().getHash());
         Block block2 = new Block("Block #2", block1.getHash());
         Block block3 = new Block("Block #3", block2.getHash());
 
@@ -58,7 +57,7 @@ public class SimpleChainTest {
 
     @Test
     void isValidChainShouldReturnFalseIfBlockDataIsTampered() throws NoSuchFieldException, IllegalAccessException {
-        Block block1 = new Block("Block #1", Hash.from("genesis"));
+        Block block1 = new Block("Block #1", testChain.getGenesisBlock().getHash());
         testChain.addBlock(block1);
 
 		// Tamper with block1's hash
@@ -69,7 +68,7 @@ public class SimpleChainTest {
 
     @Test
     void isValidChainShouldReturnFalseIfPreviousHashLinkBroken() {
-        Block block1 = new Block("Block #1", Hash.from("genesis"));
+        Block block1 = new Block("Block #1", testChain.getGenesisBlock().getHash());
         testChain.addBlock(block1);
 
         // Add a block that doesn't link properly

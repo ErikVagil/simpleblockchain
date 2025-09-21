@@ -3,10 +3,12 @@ package com.erikvagil;
 import java.util.ArrayList;
 
 public class SimpleChain {
-	public Hash genesis = Hash.from("genesis");
+	private Block genesis = new Block("This is the genesis block", Hash.from("simplegenesis"));
 	private final ArrayList<Block> blockChain = new ArrayList<>();
 
-	public SimpleChain() {}
+	public SimpleChain() {
+		blockChain.add(genesis);
+	}
 
 	public void addBlock(Block newBlock) {
 		blockChain.add(newBlock);
@@ -24,7 +26,6 @@ public class SimpleChain {
 
 		Block current;
 		Block previous;
-
 		for (int i = 0; i < blockChain.size(); i++) {
 			current = blockChain.get(i);
 
@@ -45,5 +46,9 @@ public class SimpleChain {
 		}
 
 		return true;
+	}
+
+	public Block getGenesisBlock() {
+		return genesis;
 	}
 }
